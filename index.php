@@ -1,3 +1,7 @@
+<?php 
+session_start()
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,25 +9,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <title>Formulário RH</title>
 </head>
 
 <body>
+    <section class="header">
+        <h1>Formulário RH</h1>
+        <small>Novas contratações</small>
+    </section>
     <section class="container">
+        <?php 
+        if(isset($_SESSION['msg']))
+        echo $_SESSION['msg'];
+        unset ($_SESSION['msg']);
+        ?>
+
         <form method="post" action="processa.php">
             <div class="my-3 form-group">
                 <label for="formGroupExampleInput">Nome</label>
-                <input name="nome" type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome">
+                <input required name="nome" type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome">
             </div>
             <div class="my-3 form-group">
                 <label for="exampleFormControlInput1">Endereço de email</label>
-                <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@exemplo.com">
+                <input required name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@exemplo.com">
+            </div>
+            <div class="form-group">
+                <label for="inputFone" class="control-label">Telefone</label>
+                <input type="text" class="form-control" id="inputFone" placeholder="Telefone" name="telefone"  size=10 maxlength=11 minlength=10 required>
+                <div class="help-block with-errors"></div>
             </div>
             <div class="my-3 form-group col-md-4">
                 <label for="inputGenero">Gênero</label>
-                <select name="genero" id="inputGenero" class="form-control">
+                <select required name="genero" id="inputGenero" class="form-control">
                     <option selected>Outros</option>
                     <option>Masculino</option>
                     <option>Feminino</option>
@@ -31,7 +51,7 @@
             </div>
             <div class="my-3  form-group">
                 <label for="exampleFormControlTextarea1">Comentário</label>
-                <textarea name="comentario" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea required name="comentario" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <div class="my-3 ">
                 <h6>Atuação</h6>
@@ -42,13 +62,13 @@
                     </label>
                 </div>
                 <div class="form-check">
-                    <input value="1" class="form-check-input" type="radio" name="atuacao" id="exampleRadios2" >
+                    <input value="1" class="form-check-input" type="radio" name="atuacao" id="exampleRadios2">
                     <label class="form-check-label" for="exampleRadios2">
                         Desenvolvimento
                     </label>
                 </div>
                 <div class="form-check">
-                    <input value="2" class="form-check-input" type="radio" name="atuacao" id="exampleRadios2" >
+                    <input value="2" class="form-check-input" type="radio" name="atuacao" id="exampleRadios2">
                     <label class="form-check-label" for="exampleRadios2">
                         Gestão
                     </label>
@@ -95,7 +115,7 @@
             </div>
             <div class="my-3  form-group col-md-6">
                 <label for="inputPassword4">Senha</label>
-                <input name="senha" type="password" class="form-control" id="inputPassword4" placeholder="Senha">
+                <input required name="senha" type="password" class="form-control" id="inputPassword4" placeholder="Senha">
             </div>
             <button type="submit" class="my-3 d-flex justify-content-between btn btn-primary">Enviar</button>
         </form>
